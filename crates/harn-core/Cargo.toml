@@ -1,0 +1,17 @@
+[package]
+name = "harn-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+harn-i18n.workspace = true
+async-trait.workspace = true
+base64.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["sync"] }
+
+[lints]
+workspace = true

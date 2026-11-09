@@ -1,0 +1,14 @@
+/target
+Cargo.lock.bak
+*.log
+
+# 前端工程（crates/harn-web-frontend）
+node_modules/
+dist/
+
+# harn 本地配置/本地目录（设置与本地覆盖不进仓库）
+.harn/
+
+
+# 外部仓库克隆（参考资料副本，不进本仓库）
+reference/

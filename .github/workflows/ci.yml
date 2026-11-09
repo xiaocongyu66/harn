@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+# 同一分支的新推送取消排队中的旧运行，省 runner 分钟。
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # Job 1：格式 + clippy（生产路径禁 unwrap/expect，测试内豁免见 clippy.toml）。
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Clippy (workspace, -D warnings)
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+  # Job 2：全量测试（依赖 lint 的 clippy 产物，两个 job 与 lint 并行编译互不等待——
+  # rust-cache 的 sccache 后端共享编译缓存，lint 的 clippy 产物直接被这里复用）。
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          # 与 lint job 共用同一份缓存键空间：clippy 的检查产物可直接复用
+          key: cargo-shared
+      - name: Test (workspace)
+        # mock LSP 集成测试需要 python3；ubuntu-latest 自带。
+        run: cargo test --workspace
+
+  # Job 3：前端工程（pnpm；类型/测试/构建，与 Rust job 并行）。
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: crates/harn-web-frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: crates/harn-web-frontend/pnpm-lock.yaml
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm run typecheck
+      - name: Test
+        run: pnpm test
+      - name: Build
+        run: pnpm run build

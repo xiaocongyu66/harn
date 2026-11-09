@@ -1,0 +1,28 @@
+[package]
+name = "harn-tools"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+harn-i18n.workspace = true
+harn-core.workspace = true
+harn-config.workspace = true
+harn-permission.workspace = true
+harn-search.workspace = true
+lsp-types.workspace = true
+url.workspace = true
+reqwest.workspace = true
+async-trait.workspace = true
+futures-util.workspace = true
+libc.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,22 @@
+[package]
+name = "harn-permission"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+harn-i18n.workspace = true
+harn-core.workspace = true
+harn-config.workspace = true
+async-trait.workspace = true
+globset.workspace = true
+crossterm.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+shell-words.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

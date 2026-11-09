@@ -1,0 +1,44 @@
+[package]
+name = "harn-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "harn"
+path = "src/main.rs"
+
+[dependencies]
+harn-core.workspace = true
+harn-config.workspace = true
+harn-i18n.workspace = true
+harn-permission.workspace = true
+harn-providers.workspace = true
+harn-tools.workspace = true
+harn-hooks.workspace = true
+harn-session.workspace = true
+harn-agent.workspace = true
+harn-ui.workspace = true
+harn-web.workspace = true
+harn-daemon.workspace = true
+libc.workspace = true
+harn-web-protocol.workspace = true
+anyhow.workspace = true
+chrono.workspace = true
+clap.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+ratatui.workspace = true
+crossterm.workspace = true
+async-trait.workspace = true
+ratatui-style = "0.2.0"
+unicode-width.workspace = true
+
+[dev-dependencies]
+assert_cmd.workspace = true
+predicates.workspace = true
+tempfile.workspace = true
+uuid.workspace = true
+
+[lints]
+workspace = true

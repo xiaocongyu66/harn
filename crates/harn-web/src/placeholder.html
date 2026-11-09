@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>harn web</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        font: 14px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #0d1117; color: #e6edf3;
+      }
+      .card { max-width: 32rem; padding: 2rem 2.5rem; border: 1px solid #30363d; border-radius: 12px; }
+      h1 { font-size: 1.25rem; margin: 0 0 .5rem; }
+      p { margin: .5rem 0; color: #9198a1; }
+      code { background: #161b22; padding: .1rem .35rem; border-radius: 4px; color: #79c0ff; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>harn web <span style="color:#8b949e;font-weight:400">· 占位页</span></h1>
+      <p>WebSocket 协议已就绪，React（assistant-ui）前端构建产物就绪后替换此页面。</p>
+      <p>连接 <code>/ws?token=…</code> 后按协议收发 JSON：浏览器→
+      <code>send/abort/choose</code>，harn→<code>entry/delta/modal/status/done</code>。</p>
+    </div>
+  </body>
+</html>

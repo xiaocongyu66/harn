@@ -1,0 +1,21 @@
+[package]
+name = "harn-search"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+harn-i18n.workspace = true
+encoding_rs.workspace = true
+globset.workspace = true
+grep-matcher.workspace = true
+grep-pcre2.workspace = true
+grep-regex.workspace = true
+grep-searcher.workspace = true
+ignore.workspace = true
+memchr.workspace = true
+regex.workspace = true
+rustc-hash.workspace = true
+
+[lints]
+workspace = true

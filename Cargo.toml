@@ -1,0 +1,77 @@
+[workspace]
+members = ["crates/*"]
+resolver = "3"
+exclude = ["reference", "crates/harn-web-frontend"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "LicenseRef-BlueOakModel-1.0.0"
+repository = "https://github.com/xiaocongyu66/harn"
+
+[workspace.dependencies]
+harn-core = { path = "crates/harn-core" }
+harn-config = { path = "crates/harn-config" }
+harn-search = { path = "crates/harn-search" }
+harn-permission = { path = "crates/harn-permission" }
+harn-providers = { path = "crates/harn-providers" }
+harn-tools = { path = "crates/harn-tools" }
+harn-hooks = { path = "crates/harn-hooks" }
+harn-session = { path = "crates/harn-session" }
+harn-i18n = { path = "crates/harn-i18n" }
+harn-agent = { path = "crates/harn-agent" }
+harn-ui = { path = "crates/harn-ui" }
+harn-cli = { path = "crates/harn-cli" }
+harn-web-protocol = { path = "crates/harn-web-protocol" }
+harn-web = { path = "crates/harn-web" }
+harn-daemon = { path = "crates/harn-daemon" }
+
+anyhow = "1.0.104"
+async-trait = "0.1.92"
+base64 = "0.23.1"
+chrono = { version = "0.4.45", features = ["serde"] }
+clap = { version = "4.6.7", features = ["derive", "env"] }
+crossterm = "0.29.0"
+dirs = "7.0.0"
+encoding_rs = "0.8.44"
+futures-util = "0.3.34"
+globset = "0.4.21"
+grep-matcher = "0.1.9"
+grep-pcre2 = "0.1.10"
+grep-regex = "0.1.14"
+grep-searcher = "0.1.17"
+rust-i18n = "3"
+rust-i18n-support = "3"
+once_cell = "1"
+ignore = "0.4.34"
+libc = "0.2.191"
+lsp-types = { version = "0.97", features = ["proposed"] }
+url = "2.5.8"
+memchr = "2.8.3"
+pulldown-cmark = { version = "0.13", default-features = false }
+strip-ansi = "0.1.0"
+ratatui = "0.30.2"
+regex = "1.13.1"
+reqwest = { version = "0.13.5", default-features = false, features = ["json", "stream", "rustls"] }
+rustc-hash = "2.1.3"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+shell-words = "1.1.1"
+syntect = { version = "5.3", default-features = false, features = ["default-fancy"] }
+thiserror = "2.0.21"
+tokio = { version = "1.54.1", features = ["full"] }
+unicode-width = "0.2.3"
+uuid = { version = "1.29.0", features = ["v4", "serde"] }
+assert_cmd = "2.2.2"
+predicates = "3.1.4"
+tempfile = "3.27.0"
+
+[workspace.lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+
+# 生产路径禁止裸 unwrap/expect（测试内由 clippy.toml 豁免），
+# 逼迫错误沿 Result 显式传播——长跑代理程序不能因一处假设落空而整体崩溃。
+[workspace.lints.clippy]
+unwrap_used = "warn"
+expect_used = "warn"
